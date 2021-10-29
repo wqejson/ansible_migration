@@ -1,0 +1,34 @@
+---
+
+# - name: Installation of pymysql 
+#   become: true
+#   hosts: all
+#   roles:
+
+#     - {role: "pre-migration-depedencies", tags: ["pre-migration-depedencies"]}
+
+
+- name: Dump all mysql databases into a backup directory
+  become: true
+  hosts: host1
+  become_user: root
+  roles:
+
+    - {role: "dump-mysql-database", tags: ["dump-mysql-database"]}
+
+
+- name: Copy all sites directory to the server
+  become: true
+  hosts: host1
+  roles:
+
+    - {role: "migrate-ispconfig-app", tags: ["migrate-ispconfig-app"]}
+
+
+- name: Import all mysql databases
+  become: true
+  hosts: host2
+  become_user: root
+  roles:
+
+    - {role: "import-mysql-database", tags: ["import-mysql-database"]}

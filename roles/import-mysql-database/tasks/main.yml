@@ -1,0 +1,10 @@
+---
+# tasks file for import-mysql-database
+
+# #import mysql dump data in mysql databases (on ispconfig-test-vm)
+- name: 🚀 Import mysql data into new empty databases 🚀
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /var/lib/mysql/all_databases.sql
+    login_password: "{{ mysql_root_password }}"

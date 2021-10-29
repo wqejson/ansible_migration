@@ -1,0 +1,19 @@
+---
+# tasks file for migrate-isp-config-app
+
+- name: 🚀 Migrate websites directories from ispconfig-16 to new ispconfig 🚀 #must be executed on ispconfig-test-vm
+  synchronize:
+    src: /var/libs/www/
+    dest: /mnt/var/www/migrated-sites-content
+    mode: pull
+  delegate_to: host2
+
+  #from host to delegate [push]
+
+#Migrate all dump files from ispconfig-16 to ispconfig-test-vm
+- name: 🚀 Migrate all dump mysql files from ispconfig-16 to new ispconfig 🚀 #must be executed on new-vm-ispconfig
+  synchronize:
+    src: /var/lib/mysql/backup/all_databases.sql
+    dest: /var/lib/mysql/all_databases.sql
+    mode: pull
+  delegate_to: host2

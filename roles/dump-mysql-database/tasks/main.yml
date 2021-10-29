@@ -1,0 +1,15 @@
+---
+# tasks file for dump-mysql-database
+
+# #dump all databases on ispconfig-16
+
+- name: 🚀 Dump all databases on ispconfig-16 🚀 #must be executed on ispconfig-16
+  community.mysql.mysql_db:
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    ignore_tables: 
+      - mysql.innodb_index_stats
+      - mysql.innodb_table_stats
+    state: dump
+    name: all
+    target: /var/lib/mysql/backup/all_databases.sql
+    login_password: "{{ mysql_root_password2 }}"

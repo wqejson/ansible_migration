@@ -1,0 +1,7 @@
+---
+# tasks file for pre-migration-depedencies
+
+- name: Install The PyMySQL
+  pip:
+    name: pymysql
+    state: latest
